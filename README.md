@@ -1,19 +1,16 @@
-# MapMyMood v2 — Travel site with backend-ready auth
+# MapMyMood v3
 
 Оновлена версія сайту для подорожей.
 
-## Що додано
+## Що змінено
 
-- Вхід / реєстрація / вихід з акаунта.
-- Demo backend через `localStorage`, якщо Firebase не підключено.
-- Firebase-ready backend: Auth + Firestore.
-- Збереження обраних подорожей для користувача.
-- Історія проходження Smart Quiz.
-- Чернетки бронювань.
-- Більша база travel-ідей: 16 напрямків.
-- Пошук, фільтр за бюджетом, сортування за Match Score / ціною / днями.
-- Окрема сторінка Backend з описом структури даних.
-- `vite.config.js` уже налаштований для GitHub Pages репозиторію `/Travel/`.
+- Прибрана окрема вкладка **Backend** з навігації.
+- Вхід / реєстрація / вихід з акаунта залишились.
+- Обране, історія тестів і чернетки бронювань працюють через localStorage або Firebase, якщо заповнити `.env`.
+- Matchmaker перероблено: бюджет, настрій, темп і клімат тепер мають різну вагу, а дорогі поїздки не отримують високий бал для малого бюджету.
+- У деталях подорожі показується правильний Match Score саме за останнім тестом.
+- Додано блок “Твій travel-профіль”, пояснення “Чому підходить” і кнопку **Здивуй мене**.
+- Додано більше ідей подорожей: 20 напрямків.
 
 ## Запуск локально
 
@@ -22,51 +19,20 @@ npm install
 npm run dev
 ```
 
-## Build
-
-```bash
-npm run build
-npm run preview
-```
-
-## Деплой на GitHub Pages через папку docs
+## Оновлення GitHub Pages через /docs
 
 ```powershell
+npm install
 npm run build
 if (Test-Path docs) { Remove-Item -Recurse -Force docs }
 Copy-Item -Recurse dist docs
 git add .
-git commit -m "update MapMyMood v2"
+git commit -m "update MapMyMood v3"
 git push
 ```
 
-У GitHub Pages вибери:
+У GitHub Pages має бути:
 
-```text
-Source: Deploy from a branch
-Branch: main
-Folder: /docs
-```
-
-## Підключення Firebase
-
-1. Створи Firebase project.
-2. Увімкни Authentication → Email/Password.
-3. Створи Firestore Database.
-4. Скопіюй `.env.example` у `.env`.
-5. Заповни `VITE_FIREBASE_*` значення.
-6. Перезапусти `npm run dev`.
-
-Якщо `.env` не заповнений, сайт працює в demo-local режимі через localStorage.
-
-## Firestore structure
-
-```text
-users/{uid}
-  name: string
-  email: string
-  favorites: string[]
-  history: object[]
-  bookings: object[]
-  createdAt / updatedAt
-```
+- Source: Deploy from a branch
+- Branch: main
+- Folder: /docs
